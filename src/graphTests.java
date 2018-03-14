@@ -29,6 +29,19 @@ public class graphTests {
     }
 
     @Test
+    public void addEdge2() {
+        Edge e1 = new Edge(10, "A", "B");
+        graph = new Graph();
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addEdge(e1);
+        assertEquals("[A, B]\n[A -> 10 -> B]", graph.toString());
+
+
+
+    }
+
+    @Test
     public void removeVertex() {
         graph = new Graph();
         graph.addVertex("A");
