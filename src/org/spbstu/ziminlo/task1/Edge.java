@@ -1,19 +1,17 @@
-import sun.security.provider.certpath.Vertex;
+package org.spbstu.ziminlo.task1;
+
 
 public class Edge {
     private int weight;
     private String start;
     private String end;
 
-    public Edge (int weight, String start, String end) {
+    public Edge(int weight, String start, String end) {
         this.weight = weight;
         this.start = start;
         this.end = end;
     }
 
-    public int getWeight() {
-        return weight;
-    }
 
     public void setWeight(int weight) {
         this.weight = weight;
@@ -36,7 +34,18 @@ public class Edge {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this.getClass().equals(o.getClass())) {
+            Edge other = (Edge) o;
+            return weight == other.weight && start.equals(other.start) && end.equals(other.end);
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         return start + " -> " + weight + " -> " + end;
     }
+
+
 }
