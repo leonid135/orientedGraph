@@ -1,4 +1,4 @@
-package org.spbstu.ziminlo.task1;
+package main.java.org.spbstu.ziminlo;
 
 
 public class Edge {

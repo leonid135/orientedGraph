@@ -1,4 +1,4 @@
-package org.spbstu.ziminlo.task1;
+package main.java.org.spbstu.ziminlo;
 
 import java.util.LinkedList;
 
@@ -57,7 +57,7 @@ public class Graph {
     }
 
     /**
-     * @param other vertex
+     * @param other field name
      * @return true if contains it
      */
 
@@ -87,7 +87,7 @@ public class Graph {
     /**
      * remove a vertex if it contains
      *
-     * @param name vertex
+     * @param name name of vertex
      * @return true if contains it
      */
     public boolean removeVertex(String name) {

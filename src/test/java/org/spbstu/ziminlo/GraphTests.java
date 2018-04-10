@@ -1,6 +1,6 @@
-package org.spbstu.ziminlo.test;
+package test.java.org.spbstu.ziminlo;
 
-import org.spbstu.ziminlo.task1.Graph;
+import main.java.org.spbstu.ziminlo.Graph;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
