@@ -39,7 +39,7 @@ public class Graph {
     }
 
     /**
-     * add an edge if it not contains
+     * adds an edge if it not contains
      *
      * @param weight length of the edge
      * @param start  initial vertex

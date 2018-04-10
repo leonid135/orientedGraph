@@ -1,6 +1,7 @@
 package test.java.org.spbstu.ziminlo;
 
 import main.java.org.spbstu.ziminlo.Graph;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,28 +12,29 @@ public class GraphTests {
 
     Graph graph;
 
-    public void createGraph() {
+    @BeforeEach
+    void inEeach() {
         graph = new Graph();
+    }
+
+    public void createGraph() {
         graph.addEdge(10, "A", "B");
         graph.addEdge(30, "A", "C");
     }
 
     @Test
     public void createEmpty() {
-        graph = new Graph();
         assertEquals("[]\n[]", graph.toString());
     }
 
     @Test
     public void addVertex() {
-        graph = new Graph();
         graph.addVertex("A");
         assertEquals("[A]\n[]", graph.toString());
     }
 
     @Test
     public void addVertexFalse() {
-        graph = new Graph();
         graph.addVertex("A");
         assertFalse(graph.addVertex("A"));
     }
@@ -46,7 +48,6 @@ public class GraphTests {
 
     @Test
     public void addEdgeFalse() {
-        graph = new Graph();
         graph.addEdge(10, "A", "B");
         assertFalse(graph.addEdge(10, "A", "B"));
     }
