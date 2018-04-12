@@ -1,6 +1,5 @@
-package test.java.org.spbstu.ziminlo;
+package org.spbstu.ziminlo;
 
-import main.java.org.spbstu.ziminlo.Graph;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

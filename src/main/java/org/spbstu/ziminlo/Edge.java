@@ -1,4 +1,4 @@
-package main.java.org.spbstu.ziminlo;
+package org.spbstu.ziminlo;
 
 
 public class Edge {
@@ -49,7 +49,3 @@ public class Edge {
 
 
 }
-
-
-/**
- */

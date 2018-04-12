@@ -1,4 +1,4 @@
-package main.java.org.spbstu.ziminlo;
+package org.spbstu.ziminlo;
 
 import java.util.LinkedList;
 
