@@ -1,35 +1,28 @@
 package org.spbstu.ziminlo.task2;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Transpose {
-    private File input, output;
     private String[][] matrix;
-    private int rows, columns;
+    private int rows, columns, num;
+    private boolean a, t, r;
 
-    Transpose(ArrayList<String> lines){
+    Transpose(List<String> lines, boolean a, int num, boolean t, boolean r) {
+        this.a = a;
+        this.t = t;
+        this.r = r;
+        this.num = num;
         createMatrix(lines);
     }
 
-    Transpose(File input) throws FileNotFoundException {
-        this.input = input;
-
-        BufferedReader reader = new BufferedReader(new FileReader(this.input));
-        ArrayList<String> lines = new ArrayList<>();
-        reader.lines().filter(s -> !s.isEmpty()).forEachOrdered(lines::add);
-
-        createMatrix(lines);
-    }
-
-    private void createMatrix(ArrayList<String> lines) {
+    private void createMatrix(List<String> lines) {
         int maxLength = 0;
-        for (String line: lines) {
-            int length = line.split(" ").length;
-            if(length > maxLength) maxLength = length;
+        for (String line : lines) {
+            int length = (int) Arrays.stream(line.split(" "))
+                    .filter(s -> !s.equals(" ") && !s.isEmpty()).count();
+            if (length > maxLength) maxLength = length;
         }
 
         rows = lines.size();
@@ -37,30 +30,36 @@ public class Transpose {
         matrix = new String[rows][columns];
 
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                matrix[i][j] = "";
-            }
-        }
-
-        for (int i = 0; i < rows; i++) {
-            int length = lines.get(i).split(" ").length;
-            String[] words = lines.get(i).split(" ");
+            ArrayList<String> words = new ArrayList<>();
+            Arrays.stream(lines.get(i).split(" "))
+                    .filter(s -> !s.equals(" ") && !s.isEmpty()).forEachOrdered(words::add);
+            int length = words.size();
             for (int j = 0; j < length; j++) {
-                matrix[i][j] = words[j];
+                if (a) {
+                    if (words.get(j).length() >= num) {
+                        if (t)
+                            matrix[i][j] = words.get(j).substring(0, num);
+                        else
+                            matrix[i][j] = words.get(j);
+                    } else {
+                        StringBuilder sb = new StringBuilder();
+                        for (int k = 0; k < num; k++) {
+                            sb.append(" ");
+                        }
+                        if (r)
+                            matrix[i][j] = sb
+                                    .replace(num - words.get(j).length(), num, words.get(j)).toString();
+                        else
+                            matrix[i][j] = sb
+                                    .replace(0, words.get(j).length(), words.get(j)).toString();
+                    }
+                } else
+                    matrix[i][j] = words.get(j);
             }
         }
     }
 
-    public void flagA(int num) {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                int shift = num - matrix[i][j].length();
-                matrix[i][j] = String.format("%s%d", matrix[i][j]);
-            }
-        }
-    }
-
-    public void transpose() {
+    void transpose() {
         String[][] newMatrix = new String[columns][rows];
 
         for (int i = 0; i < rows; i++) {
@@ -76,12 +75,26 @@ public class Transpose {
         matrix = newMatrix;
     }
 
+    ArrayList<String> getTranspose() {
+        ArrayList<String> result = new ArrayList<>();
+        for (String[] row : matrix) {
+            StringBuilder sb = new StringBuilder();
+            for (String word : row) {
+                if (word != null)
+                    sb.append(word).append(" ");
+            }
+            result.add(sb.toString());
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (String[] row: matrix) {
-            for (String word: row) {
-                sb.append(word).append(" ");
+        for (String[] row : matrix) {
+            for (String word : row) {
+                if (word != null)
+                    sb.append(word).append(" ");
             }
             sb.append("\n");
         }
