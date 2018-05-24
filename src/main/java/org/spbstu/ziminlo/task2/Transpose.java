@@ -9,7 +9,7 @@ public class Transpose {
     private int rows, columns, num;
     private boolean a, t, r;
 
-    Transpose(List<String> lines, boolean a, int num, boolean t, boolean r) {
+    public Transpose(List<String> lines, boolean a, int num, boolean t, boolean r) {
         this.a = a;
         this.t = t;
         this.r = r;
@@ -35,6 +35,10 @@ public class Transpose {
                     .filter(s -> !s.equals(" ") && !s.isEmpty()).forEachOrdered(words::add);
             int length = words.size();
             for (int j = 0; j < length; j++) {
+                if (!a && (t || r)) {
+                    a = true;
+                    num = 10;
+                }
                 if (a) {
                     if (words.get(j).length() >= num) {
                         if (t)
@@ -59,7 +63,7 @@ public class Transpose {
         }
     }
 
-    void transpose() {
+    public void transpose() {
         String[][] newMatrix = new String[columns][rows];
 
         for (int i = 0; i < rows; i++) {
@@ -79,9 +83,12 @@ public class Transpose {
         ArrayList<String> result = new ArrayList<>();
         for (String[] row : matrix) {
             StringBuilder sb = new StringBuilder();
-            for (String word : row) {
+            if (row.length > 0)
+                sb.append(row[0]);
+            for (int i = 1; i < row.length; i++) {
+                String word = row[i];
                 if (word != null)
-                    sb.append(word).append(" ");
+                    sb.append(" ").append(word);
             }
             result.add(sb.toString());
         }
@@ -92,13 +99,15 @@ public class Transpose {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (String[] row : matrix) {
-            for (String word : row) {
+            if (row.length > 0)
+                sb.append(row[0]);
+            for (int i = 1; i < row.length; i++) {
+                String word = row[i];
                 if (word != null)
-                    sb.append(word).append(" ");
+                    sb.append(" ").append(word);
             }
             sb.append("\n");
         }
         return sb.toString();
     }
 }
-//

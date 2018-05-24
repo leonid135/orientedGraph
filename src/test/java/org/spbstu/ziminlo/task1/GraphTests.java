@@ -1,8 +1,8 @@
-package org.spbstu.ziminlo;
+package org.spbstu.ziminlo.task1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.spbstu.ziminlo.task1.Graph;
+import org.spbstu.ziminlo.Graph;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
